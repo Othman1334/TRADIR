@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TRADIR AI — Leaders Of Trading</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>TRADIR AI</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
@@ -14,13 +14,13 @@
 <div class="grid-overlay"></div>
 <div class="scanline"></div>
 
-<!-- HEADER -->
+<!-- ════ HEADER ════ -->
 <header class="hdr">
   <div class="hdr-right">
     <div class="logo-mark">T</div>
     <div class="logo-text">
       <span class="logo-main">TRADIR AI</span>
-      <span class="logo-sub">نظام التحليل المؤسسي الاحترافي</span>
+      <span class="logo-sub">نظام التحليل المؤسسي</span>
     </div>
   </div>
   <div class="hdr-center">
@@ -28,13 +28,10 @@
       <span class="dot-pulse"></span>
       <span>النظام يعمل</span>
     </div>
-    <!-- API CREDITS INDICATOR -->
-    <div class="api-indicator" id="apiIndicator" title="حالة API Credits">
+    <div class="api-indicator" id="apiIndicator">
       <span class="api-icon">◈</span>
       <span id="apiCreditsText">API: ---</span>
-      <div class="api-bar-wrap">
-        <div class="api-bar-fill" id="apiBarFill" style="width:100%"></div>
-      </div>
+      <div class="api-bar-wrap"><div class="api-bar-fill" id="apiBarFill"></div></div>
     </div>
   </div>
   <div class="hdr-left">
@@ -42,16 +39,15 @@
   </div>
 </header>
 
-<!-- MAIN GRID -->
+<!-- ════ MAIN GRID ════ -->
 <main class="main-grid">
 
-  <!-- RIGHT PANEL (controls) -->
+  <!-- ── RIGHT PANEL: Controls + Signal + Reasons ── -->
   <aside class="panel panel--right">
 
+    <!-- Controls -->
     <section class="card card--controls">
-      <div class="card__title">
-        <span class="card__icon">⬡</span> ماسح السوق
-      </div>
+      <div class="card__title"><span class="card__icon">⬡</span> ماسح السوق</div>
       <div class="controls-grid">
         <div class="field">
           <label>زوج الفوركس</label>
@@ -81,13 +77,12 @@
         <span class="btn-text">تحليل السوق</span>
         <span class="btn-loader" id="btnLoader"></span>
       </button>
-      <!-- CACHE STATUS -->
       <div class="cache-notice" id="cacheNotice" style="display:none">
-        <span>⚡ نتيجة محفوظة — متبقي <span id="cacheTimer">--</span>s</span>
+        ⚡ نتيجة محفوظة — متبقي <span id="cacheTimer">--</span>s
       </div>
     </section>
 
-    <!-- SIGNAL OUTPUT -->
+    <!-- Signal Output -->
     <section class="card card--signal">
       <div class="card__title"><span class="card__icon">◎</span> نتيجة الإشارة</div>
       <div class="signal-hero">
@@ -120,17 +115,17 @@
       </div>
     </section>
 
-    <!-- AI REASONING -->
+    <!-- Reasons -->
     <section class="card card--reasons">
       <div class="card__title"><span class="card__icon">◇</span> أسباب القرار</div>
       <ul class="reasons-list" id="reasonsList">
-        <li class="reason-placeholder">اضغط تحليل السوق لرؤية الأسباب...</li>
+        <li class="reason-placeholder">اضغط تحليل السوق...</li>
       </ul>
     </section>
 
   </aside>
 
-  <!-- CENTER CHART -->
+  <!-- ── CENTER: TradingView Chart ── -->
   <section class="panel panel--chart">
     <div class="chart-hdr">
       <span id="chartPairLabel">EUR/USD — 1 دقيقة</span>
@@ -140,14 +135,15 @@
     <audio id="entrySound" src="{{ url_for('static', filename='sounds/alert.mp3') }}"></audio>
   </section>
 
-  <!-- LEFT PANEL (engines) -->
+  <!-- ── LEFT PANEL: Engines ── -->
   <aside class="panel panel--left">
 
+    <!-- Structure -->
     <section class="card">
       <div class="card__title"><span class="card__icon">△</span> محرك الهيكل</div>
       <div class="engine-grid">
         <div class="eng-item"><div class="eng-label">الاتجاه</div><div class="eng-val" id="eTrend">—</div></div>
-        <div class="eng-item"><div class="eng-label">كسر الهيكل</div><div class="eng-val" id="eBos">—</div></div>
+        <div class="eng-item"><div class="eng-label">كسر الهيكل BOS</div><div class="eng-val" id="eBos">—</div></div>
         <div class="eng-item"><div class="eng-label">CHOCH</div><div class="eng-val" id="eChoch">—</div></div>
         <div class="eng-item"><div class="eng-label">قوة الشمعة</div><div class="eng-val" id="eStrength">—</div></div>
         <div class="eng-item"><div class="eng-label">HH / HL</div><div class="eng-val" id="eHHHL">—</div></div>
@@ -155,16 +151,18 @@
       </div>
     </section>
 
+    <!-- Liquidity -->
     <section class="card">
       <div class="card__title"><span class="card__icon">◉</span> محرك السيولة</div>
       <div class="engine-grid">
         <div class="eng-item eng-item--full"><div class="eng-label">سحب السيولة</div><div class="eng-val eng-val--sm" id="eSweep">—</div></div>
         <div class="eng-item eng-item--full"><div class="eng-label">صيد وقف الخسارة</div><div class="eng-val eng-val--sm" id="eStopHunt">—</div></div>
         <div class="eng-item"><div class="eng-label">كسر وهمي</div><div class="eng-val" id="eFakeBO">—</div></div>
-        <div class="eng-item"><div class="eng-label">قمم / قيعان متساوية</div><div class="eng-val" id="eEqHL">—</div></div>
+        <div class="eng-item"><div class="eng-label">قمم/قيعان متساوية</div><div class="eng-val" id="eEqHL">—</div></div>
       </div>
     </section>
 
+    <!-- Smart Money -->
     <section class="card">
       <div class="card__title"><span class="card__icon">◈</span> محرك السمارت موني</div>
       <div class="engine-grid">
@@ -182,18 +180,18 @@
   </aside>
 </main>
 
-<!-- RATE LIMIT OVERLAY -->
+<!-- Rate Limit Overlay -->
 <div class="rate-overlay" id="rateOverlay" style="display:none">
   <div class="rate-box">
     <div class="rate-icon">⏱</div>
     <div class="rate-title">تجاوز حد الطلبات</div>
-    <div class="rate-msg">انتظر <span id="rateCountdown">60</span> ثانية ثم سيتم التحليل تلقائياً</div>
+    <div class="rate-msg">انتظر <span id="rateCountdown">60</span> ثانية</div>
     <div class="rate-bar-wrap"><div class="rate-bar-fill" id="rateBarFill"></div></div>
-    <div class="rate-tip">💡 نصيحة: النتائج محفوظة 60 ثانية — لا تحتاج لإعادة تحليل نفس الزوج</div>
+    <div class="rate-tip">💡 النتائج محفوظة 60 ثانية — لا تحتاج لإعادة تحليل نفس الزوج</div>
   </div>
 </div>
 
-<!-- SIGNAL TOAST -->
+<!-- Signal Toast -->
 <div class="toast" id="signalToast">
   <div class="toast-dir" id="toastDir">CALL</div>
   <div class="toast-details" id="toastDetails"></div>
@@ -220,15 +218,14 @@ function loadTradingViewChart(symbol) {
 }
 function changePair() {
   const sel = document.getElementById("pairSelect");
-  const tv  = sel.value;
   const lbl = sel.options[sel.selectedIndex].getAttribute("data-api");
   document.getElementById("chartPairLabel").textContent = lbl + " — 1 دقيقة";
-  loadTradingViewChart(tv);
+  loadTradingViewChart(sel.value);
 }
 window.onload = () => {
   loadTradingViewChart("FX:EURUSD");
   updateApiStatus();
-  setInterval(updateApiStatus, 15000); // كل 15 ثانية
+  setInterval(updateApiStatus, 15000);
 };
 </script>
 </body>
