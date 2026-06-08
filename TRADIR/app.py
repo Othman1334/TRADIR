@@ -9,7 +9,7 @@ from core.analyzer import analyze_market
 
 app = Flask(__name__)
 
-VALID_LICENSES = ["LOT-1234-5678","LOT-9999-0000","LOT-ABCD-EFGH"]
+VALID_LICENSES = ["@THE_LEADER_Mahmoud"]
 
 TREND_AR    = {"bullish":"صاعد","bearish":"هابط","neutral":"تذبذب"}
 STRENGTH_AR = {"strong":"قوية","medium":"متوسطة","weak":"ضعيفة"}
